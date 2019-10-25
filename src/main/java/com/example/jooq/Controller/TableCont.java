@@ -28,23 +28,28 @@ public class TableCont {
         return "table";
     }
 
+    //主接口，看这一个就行了
     @RequestMapping(path = {"/listloginfo"})
     @ResponseBody
     public String getData(HttpServletRequest request) {
-//        String start = 0 + "";
-//        String length = 5 + "";
-//        String draw = 1 + ""
+        //得到开始索引
         String start = request.getParameter("start");
+        //得到查询长度
         String length = request.getParameter("length");
+        //得到搜索字符串
         Map qmap = request.getParameterMap();
         String[] queryList = (String[]) qmap.get("search[value]");
         String query = queryList[0];
+        //自带的参数
         String draw = request.getParameter("draw");
         System.out.println("1123   query  " + query);
+        //分页搜索一部分数据
         Result<DataRecord> fetch = dsl.selectFrom(Tables.DATA).where(Tables.DATA.ID.like("%" + query + "%")).orderBy(Tables.DATA.ID.asc()).offset(Integer.parseInt(start)).limit(Integer.parseInt(length)).fetch();
+        //搜索所有数据
         Result<DataRecord> fetchAll = dsl.selectFrom(Tables.DATA).where(Tables.DATA.ID.like("%" + query + "%")).orderBy(Tables.DATA.ID.desc()).fetch();
         System.out.println("1123   " + "fetch  " + fetch.size());
         System.out.println("1123   " + "fetchAll  " + fetchAll.size());
+        //返回数据
         HashMap<String, Object> map = new HashMap<>();
         map.put("draw", draw);
         map.put("page", Integer.parseInt(start) / Integer.parseInt(length) + 1);
@@ -69,12 +74,6 @@ public class TableCont {
     @RequestMapping(path = {"/data/{start}/{length}/{draw}"})
     @ResponseBody
     public String getData2(@PathVariable(name = "start") int start, @PathVariable(name = "length") int length, @PathVariable(name = "draw") int draw) {
-//        String start = 0 + "";
-//        String length = 5 + "";
-//        String draw = 1 + "";
-//        String start = request.getParameter("start");
-//        String length = request.getParameter("length");
-//        String draw = request.getParameter("draw");
         System.out.println("1123   " + "start  " + start);
         System.out.println("1123   " + "length  " + length);
         Result<DataRecord> fetch = dsl.selectFrom(Tables.DATA).orderBy(Tables.DATA.ID.asc()).offset(start).limit(length).fetch();

@@ -1,0 +1,11 @@
+2019-10-25 15:47:40.624  INFO 21800 --- [           main] com.zaxxer.hikari.HikariDataSource       : 程序出现错误
+2019-10-25 15:47:40.735  INFO 21800 --- [           main] com.zaxxer.hikari.HikariDataSource       : 将会导致世界毁灭
+2019-10-25 15:47:41.183  INFO 21800 --- [           main] o.s.s.concurrent.ThreadPoolTaskExecutor  : 以下输出无用信息
+2019-10-25 15:47:41.558  INFO 21800 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : 程序做出的反应亦是无用信息
+2019-10-25 15:47:41.562  INFO 21800 --- [           main] com.example.jooq.JooqApplication         : 只有把钱打入以下账户才会有用
+2019-10-25 15:47:40.541  INFO 21800 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : 微信打款  手机号：13063537901
+
+
+
+
+

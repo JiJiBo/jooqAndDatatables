@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Bootstrap 101 Template</title>
+    <script src="../../static/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../../static/css/dataTables.min.css">
+    <script src="../../static/js/jquery.dataTables.min.js"></script>
+</head>
+<body>
+<table id="tt" width="100%">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>员工信息</th>
+        <th>访问时间</th>
+        <th>响应时间</th>
+        <th>日志类型</th>
+        <th>APP_ID</th>
+        <th>菜单ID</th>
+        <th>菜单名称</th>
+        <th>手机操作系统信息</th>
+        <th>手机串号信息唯一标识</th>
+        <th>异常信息</th>
+    </tr>
+    </thead>
+    <thead></thead>
+</table>
+
+<script type="text/javascript">
+    $('#tt').on('init.dt', function () {
+        // alert($("#tt").DataTable().ajax.params().acount.valueOf());
+        // $("#tt").DataTable().clear().draw()
+        // $("#tt").DataTable().draw()
+        // $("#tt").DataTable().column(4).data(function (data) {
+        //     alert(data.toString())
+        //     return "<a href='www.baidu.com'>呵呵</a>";
+        // })
+    });
+    $(document).ready(function () {
+        $("#tt").DataTable({ //对表格控件进行初始化
+            ordering: false,  // 关闭排序
+            searching: true,  // 关闭插件自带的搜索，我们会自定义搜索
+            serverSide: true,  //服务器模式
+            Processing: true,  //是否显示“处理中...”
+            scrollX: true,  //水平方向的滚动条
+            autoWidth: true,  // 自动宽度
+            destroy: true,
+            lengthMenu: [10, 25, 50, 100],  // 分页器的页数
+            ajax: {
+                //指定数据源
+                url: "http://localhost:8080/sysLogInfoController/listloginfo",
+                type: "POST",
+                // 这里向后端传递查询参数
+                data: {
+                    "acount": "dsdsdsf",
+                    "aaa": "vvv"
+                }
+            },
+            // 与<table>标签中的<th>标签内的字段对应
+            columns: [
+                {
+                    data: "id"
+                },
+                {
+                    data: "party_account"
+                },
+                {
+                    data: "access_date"
+                },
+                {
+                    data: "response_date"
+                }, {
+                    data: "log_type"
+                }, {
+                    data: "app_id"
+                }, {
+                    data: "menu_id"
+                }, {
+                    data: "menu_name"
+                }, {
+                    data: "phone_info"
+                }, {
+                    data: "phone_unique"
+                }, {
+                    data: "error_msg"
+                }],
+            // 语言
+            language: {
+                "sProcessing": "处理中...",
+                "sLengthMenu": "显示 _MENU_ 项结果",
+                "sZeroRecords": "没有匹配结果",
+                "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                "sInfoPostFix": "",
+                "sSearch": "搜索:",
+                "sUrl": "",
+                "sEmptyTable": "表中数据为空",
+                "sLoadingRecords": "载入中...",
+                "sInfoThousands": ",",
+                "oPaginate": {
+                    "sFirst": "首页",
+                    "sPrevious": "上页",
+                    "sNext": "下页",
+                    "sLast": "末页"
+                },
+                "oAria": {
+                    "sSortAscending": ": 以升序排列此列",
+                    "sSortDescending": ": 以降序排列此列"
+                }
+            },
+            "columnDefs": [
+                {
+                    "render": function (data, type, row) {
+                        return "<a href='https://www.baidu.com/?tn=57095150_2_oem_dg'>呵呵</a>";
+                    },
+                    "targets": 3,
+                },
+                {
+                    "render": function (data, type, row) {
+                        return "<a  class='btn-tab104-update' href='https://www.baidu.com/?tn=57095150_2_oem_dg'>呵呵</a>";
+                    },
+                    "targets": 4,
+                }
+            ],
+        });
+    });
+    $('#tt').delegate('.btn-tab104-update', "click", function () {
+
+        var data = $('#tt').DataTable().row($(this).parents('tr')).data();
+        //var data= JSON.parse(decodeURI(data));
+        $("#form-opsa_search_class_add input[name=id]").val(data.access_date);
+
+    });
+</script>
+</body>
+</html>
